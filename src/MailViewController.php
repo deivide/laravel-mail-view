@@ -24,7 +24,7 @@ class MailViewController extends BaseController
     {
         $className = rtrim(config('mail-view.namespace'), "\\") ."\\".$className;
         $preview = new $className;
-        $mailable =  $preview->{$methodName}();
+        $mailable = $preview->{$methodName}();
 
         $reflexionClass = new \ReflectionClass(new $className);
         $reflextionMethod = $reflexionClass->getMethod($methodName);
@@ -83,7 +83,7 @@ class MailViewController extends BaseController
 
     private function getNullMailer()
     {
-        $transport = Mail::createTransport(['host'=> 'local.local', 'port' => 666]);
+        $transport = Mail::createTransport(['host'=> 'local.local', 'port' => 666, 'transport' => 'array']);
 
         return new NullMailer(
             'null_mailer',
